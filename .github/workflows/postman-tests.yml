@@ -20,19 +20,20 @@ jobs:
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
+      - name: Create reports directory
+        run: mkdir -p postman/reports
+
       - name: Run Postman Collection
         run: |
           postman collection run "postman/PetStore.postman_collection.json" \
             --environment "postman/PetStore.postman_environment.json" \
             --working-dir "postman" \
-            --reporters cli,html,junit \
-            --reporter-html-export reports/postman-report.html \
-            --reporter-junit-export reports/postman-report.xml
-
-            echo "Arquivos gerados:"
-          find postman -type f | sort
+            --reporters cli,junit,html \
+            --reporter-junit-export "$GITHUB_WORKSPACE/postman/reports/postman-report.xml" \
+            --reporter-html-export "$GITHUB_WORKSPACE/postman/reports/postman-report.html"
 
       - name: Upload test reports
+        if: always()
         uses: actions/upload-artifact@v5
         with:
           name: postman-test-reports
