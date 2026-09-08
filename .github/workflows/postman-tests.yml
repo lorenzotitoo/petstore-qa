@@ -29,6 +29,9 @@ jobs:
             --reporter-html-export reports/postman-report.html \
             --reporter-junit-export reports/postman-report.xml
 
+            echo "Arquivos gerados:"
+          find postman -type f | sort
+
       - name: Upload test reports
         uses: actions/upload-artifact@v5
         with:
