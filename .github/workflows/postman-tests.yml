@@ -1,6 +1,6 @@
-name : Postman API Tests
+name: Postman API Tests
 
-on: 
+on:
   push:
     branches:
       - main
@@ -14,21 +14,24 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
-      - name: Check project files
-        run: |
-          pwd
-          ls -la
-          ls -la postman
-
       - name: Run Postman Collection
         run: |
           postman collection run "postman/PetStore.postman_collection.json" \
             --environment "postman/PetStore.postman_environment.json" \
-            --working-dir "postman"
+            --working-dir "postman" \
+            --reporters cli,html,junit \
+            --reporter-html-export reports/postman-report.html \
+            --reporter-junit-export reports/postman-report.xml
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v5
+        with:
+          name: postman-test-reports
+          path: postman/reports/
  
