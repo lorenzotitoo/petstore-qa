@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Postman Collection
         run: |
-          postman collection run "postman/Petstore.postman_collection.json" \
+          postman collection run "postman/PetStore.postman_collection.json" \
             --environment "postman/PetStore.postman_environment.json" \
             --working-dir "postman"
  
