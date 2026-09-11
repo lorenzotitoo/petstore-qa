@@ -130,3 +130,8 @@ postman-report.xml
 
 Os relatórios são disponibilizados através do **Artifact `postman-test-reports`** em cada execução do GitHub Actions.
 
+### Documentação Postman
+
+Link: https://lorenzotito-9084036.postman.co/workspace/9eb163e8-b0e4-48e7-8869-4c6e6f828caf/documentation/57917096-9e4249bc-8c6b-4a91-88b7-38a968d518d6
+
+
